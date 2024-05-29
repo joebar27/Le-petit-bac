@@ -10,6 +10,7 @@ body {
     font-family: Arial, sans-serif;
     font-size: 28px;
     background-color: #000000;
+    z-index: 0;
 }
 
 h1 {
@@ -27,7 +28,6 @@ button {
     border-radius: 5px;
     cursor: pointer;
     margin: 10px;
-    z-index: 100;
 }
 
 table {
@@ -66,33 +66,36 @@ td {
 /*!               class               */
 /*! --------------------------------- */
 
+.hidden {
+    display: none;
+}
+
 .flexbutton {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.hidden {
-    display: none;
+    z-index: 100;
 }
 
 #imgCenter {
     position: absolute;
     justify-content: center;
     align-items: center;
-    z-index: -100;
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+    border-radius: 50%;
 }
 
 .circle {
     position: relative;
     background-color: transparent;
-    /* background-image: url(https://github.com/joebar27/Le-petit-bac/blob/master/pti-bac3.jpg); */
-    /* background-size: cover; */
     width: 200px;
     height: 200px;
     border-radius: 50%;
     border: 2px solid black;
+    z-index: 10;
 }
 
 .segment {
@@ -112,6 +115,7 @@ td {
     justify-content: center;
     align-items: center;
     padding-top: 5vh;
+    background-color: white;
 }
 
 .aiguille{
@@ -123,6 +127,7 @@ td {
     background-color: red;
     transform-origin: bottom;
     transform: rotate(0deg);
+    z-index: 100;
 }
 
 .fleche {
@@ -131,6 +136,7 @@ td {
     left: -10px;
     top: -12px;
     color: red;
+    z-index: 100;
 }
 
 .section {
