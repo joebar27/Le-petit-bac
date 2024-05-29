@@ -75,7 +75,8 @@ function moveAiguille(letter) {
 // Fonction de coloration de la lettre choisie
 function colorLetterChoosen(letter) {
     var spanElement = window.document.getElementById(letter);
-    spanElement.style.color = "red";
+    spanElement.style.color = "#93e5b9";
+    spanElement.style.textShadow = "4px -4px 4px #93e5b9";
     removeLetterFromArray(letter);
 }
 
@@ -121,6 +122,7 @@ function fullTurn() {
 function recolorRemovedLetters() {
     removedLetters.forEach(letter => {
         var spanElement = window.document.getElementById(letter);
-        spanElement.style.color = "white";
+        spanElement.style.color = "rebeccapurple";
+        spanElement.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.5)";
     });
 }
