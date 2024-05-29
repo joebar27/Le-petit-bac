@@ -23,6 +23,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     margin: 10px;
+    z-index: 100;
 }
 
 table {
@@ -66,7 +67,6 @@ td {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 1;
 }
 
 .hidden {
@@ -89,6 +89,7 @@ td {
     text-align: center;
     line-height: 350px;
     margin: -100px 0 0 0;
+    z-index: -10;
     transform: rotate(var(--rotate)) translateY(-50%);
     transform-origin: bottom center;
 }
