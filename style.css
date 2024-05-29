@@ -77,10 +77,18 @@ td {
     display: none;
 }
 
+#imgCenter {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    z-index: -100;
+}
+
 .circle {
     position: relative;
-    background-image: url(https://github.com/joebar27/Le-petit-bac/blob/master/pti-bac3.jpg);
-    background-size: cover;
+    background-color: transparent;
+    /* background-image: url(https://github.com/joebar27/Le-petit-bac/blob/master/pti-bac3.jpg); */
+    /* background-size: cover; */
     width: 200px;
     height: 200px;
     border-radius: 50%;
