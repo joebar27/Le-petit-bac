@@ -1,7 +1,6 @@
-//! Initialisation du tableau de l'alphabet
 var alphabet = alphabetInit();
+var removedLetters = []; // Nouveau tableau pour stocker les lettres supprimées
 
-//! Tableau de correspondance entre les lettres de l'alphabet et les degrés de l'aiguille
 var alphabetTarget = {
     A: 0,
     B: 13.84615384615385,
@@ -31,35 +30,10 @@ var alphabetTarget = {
     Z: 346.153846153846,
 };
 
-//! Fonction d'initialisation du tableau alphabet
+// Fonction d'initialisation du tableau alphabet
 function alphabetInit() {
     alphabet = [
-        "A",
-        "B",
-        "C",
-        "D",
-        "E",
-        "F",
-        "G",
-        "H",
-        "I",
-        "J",
-        "K",
-        "L",
-        "M",
-        "N",
-        "O",
-        "P",
-        "Q",
-        "R",
-        "S",
-        "T",
-        "U",
-        "V",
-        "W",
-        "X",
-        "Y",
-        "Z",
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
     ];
     var letterElement = document.querySelectorAll(".segment");
     letterElement.forEach(function (element) {
@@ -69,27 +43,28 @@ function alphabetInit() {
     return alphabet;
 }
 
-//! Fonction activer par le bouton "Lancer la roulette"
-function randomLetter() {
+// Fonction activée par le bouton "Lancer la roulette"
+async function randomLetter() {
     verifAlphabetIsVoid();
+    recolorRemovedLetters(); // Recolorer les lettres supprimées en blanc
+    await fullTurn(); // Attendre que fullTurn soit terminé
     var mathrandom = Math.random();
     var random = Math.floor(mathrandom * alphabet.length);
     var letter = alphabet[random].toUpperCase();
     console.log("Lettre choisie:", letter);
-    // fullTurn(letter);
     moveAiguille(letter);
 }
 
-//! Fonction de déplacement de l'aiguille
+// Fonction de déplacement de l'aiguille
 function moveAiguille(letter) {
     var posAiguille = 0;
     var targetPos = alphabetTarget[letter];
-    var interval = setInterval(move, 100);
+    var interval = setInterval(move, 4);
     var aiguille = document.querySelector(".aiguille");
 
     function move() {
         aiguille.style.transform = "rotate(" + posAiguille + "deg)";
-        posAiguille += 13.84615384615385;
+        posAiguille += 1;
         if (posAiguille - 0.1 > targetPos) {
             colorLetterChoosen(letter);
             clearInterval(interval);
@@ -97,40 +72,55 @@ function moveAiguille(letter) {
     }
 }
 
-//! Fonction de coloration de la lettre choisie
+// Fonction de coloration de la lettre choisie
 function colorLetterChoosen(letter) {
     var spanElement = window.document.getElementById(letter);
     spanElement.style.color = "red";
     removeLetterFromArray(letter);
 }
 
-//! Fonction de uppression de la lettre choisie dans le tableau alphabet
+// Fonction de suppression de la lettre choisie dans le tableau alphabet
 function removeLetterFromArray(letter) {
     let index = alphabet.indexOf(letter);
-    alphabet.splice(index, 1);
+    if (index !== -1) {
+        alphabet.splice(index, 1);
+        removedLetters.push(letter); // Ajouter la lettre au tableau des lettres supprimées
+    }
 }
 
-//! Fonction de vérification si le tableau alphabet est vide
+// Fonction de vérification si le tableau alphabet est vide
 function verifAlphabetIsVoid() {
     if (alphabet.length == 0) {
         alphabetInit();
+        removedLetters = []; // Réinitialiser le tableau des lettres supprimées
     } else {
         console.log("Tableau alphabet restant:", alphabet);
     }
 }
 
-//! Fonction pour faire tourner laiguille de 360°
-function fullTurn(letter) {
-    var posAiguille = 0;
-    var interval = setInterval(movefull, 100);
-    var aiguille = document.querySelector(".aiguille");
+// Fonction pour faire tourner l'aiguille de 360°
+function fullTurn() {
+    return new Promise((resolve) => {
+        console.log("Commence un tour complet");
+        var initAiguille = 0;
+        var interval = setInterval(movefull, 20);
+        var aiguille = document.querySelector(".aiguille");
 
-    function movefull() {
-        aiguille.style.transform = "rotate(" + posAiguille + "deg)";
-        posAiguille += 13.84615384615385;
-        if (posAiguille - 0.1 > 360) {
-            clearInterval(interval);
+        function movefull() {
+            aiguille.style.transform = "rotate(" + initAiguille + "deg)";
+            initAiguille += 5;
+            if (initAiguille > 360) {
+                clearInterval(interval);
+                resolve(); // Résoudre la promesse une fois le tour complet terminé
+            }
         }
-    }
-    // moveAiguille(letter);
+    });
+}
+
+// Nouvelle fonction pour recolorer les lettres supprimées en blanc
+function recolorRemovedLetters() {
+    removedLetters.forEach(letter => {
+        var spanElement = window.document.getElementById(letter);
+        spanElement.style.color = "white";
+    });
 }
