@@ -75,9 +75,18 @@ function moveAiguille(letter) {
 // Fonction de coloration de la lettre choisie
 function colorLetterChoosen(letter) {
     var spanElement = window.document.getElementById(letter);
-    spanElement.style.color = "#93e5b9";
-    spanElement.style.textShadow = "4px -4px 4px #93e5b9";
+    spanElement.style.color = "#e6ff04";
+    spanElement.style.textShadow = "0px 2px 1px black, 2px 0px 1px black, 3px -3px 5px #e6ff04 ";
     removeLetterFromArray(letter);
+}
+
+// Nouvelle fonction pour recolorer les lettres supprimées en blanc
+function recolorRemovedLetters() {
+    removedLetters.forEach(letter => {
+        var spanElement = window.document.getElementById(letter);
+        spanElement.style.color = "#ed5503";
+        spanElement.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.5)";
+    });
 }
 
 // Fonction de suppression de la lettre choisie dans le tableau alphabet
@@ -115,14 +124,5 @@ function fullTurn() {
                 resolve(); // Résoudre la promesse une fois le tour complet terminé
             }
         }
-    });
-}
-
-// Nouvelle fonction pour recolorer les lettres supprimées en blanc
-function recolorRemovedLetters() {
-    removedLetters.forEach(letter => {
-        var spanElement = window.document.getElementById(letter);
-        spanElement.style.color = "rebeccapurple";
-        spanElement.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.5)";
     });
 }
