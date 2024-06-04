@@ -1,3 +1,21 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyA6gwRp2K41KeS_CmdVq31PXxcvCzXbROM",
+  authDomain: "baccaloreat-by-angenius.firebaseapp.com",
+  projectId: "baccaloreat-by-angenius",
+  storageBucket: "baccaloreat-by-angenius.appspot.com",
+  messagingSenderId: "53884849897",
+  appId: "1:53884849897:web:9a66b08c4a8376e05b6a78"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
 var alphabet = alphabetInit();
 var removedLetters = []; // Nouveau tableau pour stocker les lettres supprimées
 
